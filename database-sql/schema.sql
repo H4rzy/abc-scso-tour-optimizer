@@ -56,6 +56,15 @@ CREATE TABLE Bookings (
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
+CREATE TABLE TourHistory (
+  HistoryID INT IDENTITY(1,1) PRIMARY KEY,
+  TourID INT FOREIGN KEY REFERENCES Tours(TourID),
+  Iteration INT,
+  BestCost FLOAT
+);
+
+
+
 INSERT INTO Destinations (Name, Lat, Lng, Description)
 VALUES 
 ('A', 10.123, 106.456, 'Điểm A'),

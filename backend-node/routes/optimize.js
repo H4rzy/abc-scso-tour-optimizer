@@ -1,13 +1,9 @@
 const express = require('express');
-const { body } = require('express-validator');
 const router = express.Router();
 const controller = require('../controllers/optimizeController');
 const auth = require('../middlewares/authmiddlewares');
+const allow = require('../middlewares/rolemiddlewares');
 
-router.post('/',
-  auth,
-  body('DestinationIDs').isArray({ min: 2 }),
-  controller.optimizeTour
-);
+router.post('/upload', auth, allow('Admin'), controller.uploadAndRun);
 
 module.exports = router;

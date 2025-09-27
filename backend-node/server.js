@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 // gan route tai api/auth
-app.use('/api/auth',require('./routes/auth'));
+app.use('/api/auth', require('./routes/auth'));
 
 //app.use('/api/users',require('./backend/routes/users'));
 

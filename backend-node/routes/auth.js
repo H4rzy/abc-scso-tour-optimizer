@@ -32,11 +32,15 @@ router.post('/register',
 
 
 //khi client gui POST /login check xem co hop le ko...
-router.post('/login'
+// khi client gửi POST /login
+router.post('/login',
     [
         body('email').isEmail().withMessage('Email ko hợp lệ'),
-        body('password').notEmpty().withMessage('mật khẩu phải >= 6 ký tự')
-    ],validate,authController.login
-)
+        body('password').notEmpty().withMessage('Mật khẩu không được để trống')
+    ],
+    validate,
+    authController.login
+);
+
 
 module.exports = router;

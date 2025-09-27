@@ -1,55 +1,66 @@
+const path = require('path');
+const fs = require('fs-extra');
+const csv = require('csv-parser');
 const { getPool, sql } = require('../db');
 const engine = require('../services/engineConnector');
 
-exports.optimizeTour = async (req, res, next) => {
+const DATA_DIR = path.join(__dirname,
+  '../../engine-Csh/SCSO-ABC hybrid/SCSO-ABC hybrid/data');
+
+const TOURDATA_PATH = path.join(DATA_DIR, 'tourdata.json');
+const BESTHISTORY_PATH = path.join(DATA_DIR, 'BestHistory.csv');
+
+exports.uploadAndRun = async (req, res, next) => {
   try {
-    // body: { DestinationIDs: [1,2,3,...], Budget?: number }
-    const { DestinationIDs = [], Budget = null, TourName = 'Auto Tour' } = req.body;
+    const data = req.body;
 
-    // 1) Lấy ma trận chi phí + meta điểm đến từ DB
+    
+    await fs.ensureDir(DATA_DIR);
+    console.log('Đang ghi data tại:',DATA_DIR);
+
+    await fs.writeJson(TOURDATA_PATH, data, { spaces: 2 });
+
+    console.log('Đang ghi tourdata.json tại:', TOURDATA_PATH);
+
+    await engine.runEngine();
+
+    console.log('Đang ghi BestHistory.csv tại:', BESTHISTORY_PATH);
+
+    const exists = await fs.pathExists(BESTHISTORY_PATH);
+    if (!exists) return res.status(500).json({ error: 'Không tìm thấy BestHistory.csv sau khi chạy Engine' });
+
     const pool = await getPool();
-    const destRs = await pool.request().query('SELECT DestinationID, Name FROM Destinations');
-    const costRs = await pool.request().query('SELECT FromDestinationID, ToDestinationID, Cost FROM TravelCosts');
+    const rs = await pool.request()
+      .input('TourName', sql.NVarChar, 'Tour via Upload')
+      .input('TotalCost', sql.Float, 0)
+      .query(`
+        INSERT INTO Tours (TourName, TotalCost)
+        VALUES (@TourName,@TotalCost);
+        SELECT SCOPE_IDENTITY() AS TourID;
+      `);
+    const TourID = rs.recordset[0].TourID;
 
-    const inputForEngine = {
-      Destinations: destRs.recordset.map(d => d.Name),
-      DestinationIDs,
-      Costs: costRs.recordset, // hoặc bạn build thành ma trận nếu Engine yêu cầu
-      Budget
-    };
+    const results = [];
+    fs.createReadStream(BESTHISTORY_PATH)
+      .pipe(csv())
+      .on('data', row => results.push(row))
+      .on('end', async () => {
+        for (const r of results) {
+          await pool.request()
+            .input('TourID', sql.Int, TourID)
+            .input('Iteration', sql.Int, r.Iteration)
+            .input('BestCost', sql.Float, r.BestCost)
+            .query('INSERT INTO TourHistory (TourID, Iteration, BestCost) VALUES (@TourID,@Iteration,@BestCost)');
+        }
 
-    // 2) Gọi Engine C#
-    const result = await engine.optimize(inputForEngine);
-    // kỳ vọng Engine trả { routeIds:[...DestinationID...], totalCost:number }
+        res.json({
+          message: 'Đã ghi tourdata.json, chạy Engine xong, insert TourHistory',
+          TourID,
+          totalRows: results.length
+        });
+      });
 
-    // 3) Lưu vào DB
-    const tx = new sql.Transaction(await getPool());
-    await tx.begin();
-    try {
-      const req1 = new sql.Request(tx);
-      const rs = await req1
-        .input('TourName', sql.NVarChar, TourName)
-        .input('TotalCost', sql.Float, result.totalCost)
-        .query(`
-          INSERT INTO Tours (TourName, TotalCost) VALUES (@TourName, @TotalCost);
-          SELECT SCOPE_IDENTITY() AS TourID;
-        `);
-      const TourID = rs.recordset[0].TourID;
-
-      for (let i = 0; i < result.routeIds.length; i++) {
-        const r = new sql.Request(tx);
-        await r
-          .input('TourID', sql.Int, TourID)
-          .input('StepOrder', sql.Int, i + 1)
-          .input('DestinationID', sql.Int, result.routeIds[i])
-          .query('INSERT INTO TourSteps (TourID, StepOrder, DestinationID) VALUES (@TourID, @StepOrder, @DestinationID)');
-      }
-      await tx.commit();
-
-      res.json({ TourID, TotalCost: result.totalCost, Steps: result.routeIds });
-    } catch (e) {
-      await tx.rollback();
-      throw e;
-    }
-  } catch (err) { next(err); }
+  } catch (err) {
+    next(err);
+  }
 };

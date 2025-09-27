@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\abc-scso-tour-optimizer\\engine-Csh\\SCSO-ABC hybrid\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D4B0FDE7-656C-4801-8996-1CD5F49BB64B}|SCSO-ABC hybrid\\SCSO-ABC hybrid.csproj|c:\\users\\pc\\abc-scso-tour-optimizer\\engine-csh\\scso-abc hybrid\\scso-abc hybrid\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D4B0FDE7-656C-4801-8996-1CD5F49BB64B}|SCSO-ABC hybrid\\SCSO-ABC hybrid.csproj|solutionrelative:scso-abc hybrid\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D4B0FDE7-656C-4801-8996-1CD5F49BB64B}|SCSO-ABC hybrid\\SCSO-ABC hybrid.csproj|c:\\users\\pc\\abc-scso-tour-optimizer\\engine-csh\\scso-abc hybrid\\scso-abc hybrid\\tourdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D4B0FDE7-656C-4801-8996-1CD5F49BB64B}|SCSO-ABC hybrid\\SCSO-ABC hybrid.csproj|solutionrelative:scso-abc hybrid\\tourdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4B0FDE7-656C-4801-8996-1CD5F49BB64B}|SCSO-ABC hybrid\\SCSO-ABC hybrid.csproj|c:\\users\\pc\\abc-scso-tour-optimizer\\engine-csh\\scso-abc hybrid\\scso-abc hybrid\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4B0FDE7-656C-4801-8996-1CD5F49BB64B}|SCSO-ABC hybrid\\SCSO-ABC hybrid.csproj|solutionrelative:scso-abc hybrid\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D4B0FDE7-656C-4801-8996-1CD5F49BB64B}|SCSO-ABC hybrid\\SCSO-ABC hybrid.csproj|c:\\users\\pc\\abc-scso-tour-optimizer\\engine-csh\\scso-abc hybrid\\scso-abc hybrid\\standard-scso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,15 +38,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "TourData.cs",
               "DocumentMoniker": "C:\\Users\\PC\\abc-scso-tour-optimizer\\engine-Csh\\SCSO-ABC hybrid\\SCSO-ABC hybrid\\TourData.cs",
               "RelativeDocumentMoniker": "SCSO-ABC hybrid\\TourData.cs",
               "ToolTip": "C:\\Users\\PC\\abc-scso-tour-optimizer\\engine-Csh\\SCSO-ABC hybrid\\SCSO-ABC hybrid\\TourData.cs",
               "RelativeToolTip": "SCSO-ABC hybrid\\TourData.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAUwDgAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAgwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T15:47:51.833Z"
+              "WhenOpened": "2025-09-27T15:47:51.833Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -74,13 +75,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\PC\\abc-scso-tour-optimizer\\engine-Csh\\SCSO-ABC hybrid\\SCSO-ABC hybrid\\Program.cs",
               "RelativeDocumentMoniker": "SCSO-ABC hybrid\\Program.cs",
               "ToolTip": "C:\\Users\\PC\\abc-scso-tour-optimizer\\engine-Csh\\SCSO-ABC hybrid\\SCSO-ABC hybrid\\Program.cs",
               "RelativeToolTip": "SCSO-ABC hybrid\\Program.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAQwFsAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAD4v1YAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-27T15:20:35.058Z",
               "EditorCaption": ""

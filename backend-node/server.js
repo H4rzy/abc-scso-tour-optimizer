@@ -7,7 +7,7 @@ const cors = require('cors');
 //load cac bien moi truong tu file .env
 require('dotenv').config();
 
-const errorHandler = require('./backend/middlewares/errorHandler');
+const errorHandler = require('./middlewares/errorHandler');
 
 
 // khoi tao server 
@@ -18,11 +18,24 @@ app.use(cors());
 app.use(express.json());
 
 // gan route tai api/auth
-app.use('/api/auth',require('./backend/routes/auth'));
+app.use('/api/auth',require('./routes/auth'));
+
 //app.use('/api/users',require('./backend/routes/users'));
+
+app.use('/api/destinations',require('./routes/destination'));
+
+app.use('/api/destinations', require('./routes/destination'));      
+
+app.use('/api/travelcosts', require('./routes/travelCost'));      
+
+app.use('/api/tours', require('./routes/tour'));              
+        
+app.use('/api/optimize', require('./routes/optimize'));               
+
 
 //kiem tra
 app.get('/',(req,res)=>res.send("Backend running OKEEEE"));
+
 
 //dat cuoi cung de bat loi next(err) tu cac route
 app.use(errorHandler);

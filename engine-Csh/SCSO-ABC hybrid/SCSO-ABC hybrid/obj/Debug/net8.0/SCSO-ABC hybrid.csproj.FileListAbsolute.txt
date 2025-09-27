@@ -1,0 +1,35 @@
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.exe
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.deps.json
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.runtimeconfig.json
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.dll
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.pdb
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.AssemblyInfoInputs.cache
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.AssemblyInfo.cs
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.dll
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\refint\SCSO-ABC hybrid.dll
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.pdb
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.genruntimeconfig.cache
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\ref\SCSO-ABC hybrid.dll
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.csproj.AssemblyReference.cache
+C:\Users\PC\source\repos\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC.EEFA4149.Up2Date
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.exe
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.deps.json
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.runtimeconfig.json
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.dll
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\SCSO-ABC hybrid.pdb
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.csproj.AssemblyReference.cache
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.AssemblyInfoInputs.cache
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.AssemblyInfo.cs
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.csproj.CoreCompileInputs.cache
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.sourcelink.json
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC.EEFA4149.Up2Date
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.dll
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\refint\SCSO-ABC hybrid.dll
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.pdb
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\SCSO-ABC hybrid.genruntimeconfig.cache
+C:\Users\PC\abc-scso-tour-optimizer\engine-Csh\SCSO-ABC hybrid\SCSO-ABC hybrid\obj\Debug\net8.0\ref\SCSO-ABC hybrid.dll

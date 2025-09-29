@@ -56,11 +56,13 @@ class Program
             return;
         }
 
-        int population = 20;    
-        int dimension = tour.PointCount; 
-        int iterMax = 100;       
-        double ub = 1.0;         
-        double lb = 0.0;        
+        int population;
+        int iterMax;
+        int dimension = tour.PointCount;
+        population = Math.Max(10, dimension);
+        iterMax = 3000;
+        double ub = 1.0;
+        double lb = 0.0;
 
         var bee = new BeeColony(population, dimension, iterMax, ub, lb);
         var scso = new SandCatSwarm(population, dimension, iterMax, ub, lb);
@@ -71,7 +73,7 @@ class Program
         var hybrid = new HybridABCSCSO(bee, scso);
 
         Console.WriteLine("\n=== BẮT ĐẦU TỐI ƯU LỘ TRÌNH (Hybrid ABC–SCSO) ===");
-        var (bestX, bestF) = hybrid.Run();
+        var (bestX, bestF) = hybrid.Run(tour);
 
         Console.WriteLine("\n=== KẾT QUẢ TỐI ƯU ===");
         Console.WriteLine("Best Random-Key vector: " + string.Join(", ", bestX));

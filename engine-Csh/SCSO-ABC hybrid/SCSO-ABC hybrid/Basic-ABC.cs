@@ -193,17 +193,28 @@ namespace SCSO_ABC_hybrid
                     }
                 }
 
-                foreach (var key in Bee.Keys.ToList())
+                int bestIndex = Bee.OrderBy(kvp => Objective(kvp.Value.Values))
+                                   .First().Key;
+
+                var candidates = Bee.Where(kvp => kvp.Key != bestIndex
+                                               && kvp.Value.Trial > Dimension)
+                                    .ToList();
+
+                if (candidates.Count > 0)
                 {
-                    var (vals, trial) = Bee[key];
-                    if (trial > Dimension)
-                    {
-                        var newVals = new List<double>();
-                        for (int j = 0; j < Dimension; j++)
-                            newVals.Add(RandomDouble(Lb, Ub));
-                        Bee[key] = (newVals, 0);
-                    }
+                    int maxTrial = candidates.Max(c => c.Value.Trial);
+                    var topTrials = candidates.Where(c => c.Value.Trial == maxTrial)
+                                              .Select(c => c.Key)
+                                              .ToList();
+                    int chosenKey = topTrials[rd.Next(topTrials.Count)];
+
+                    var newVals = new List<double>();
+                    for (int j = 0; j < Dimension; j++)
+                        newVals.Add(RandomDouble(Lb, Ub));
+
+                    Bee[chosenKey] = (newVals, 0);
                 }
+
 
                 SaveBestFitnessPerIteration(BestHistory);
                 PrintPopulation(iterC);

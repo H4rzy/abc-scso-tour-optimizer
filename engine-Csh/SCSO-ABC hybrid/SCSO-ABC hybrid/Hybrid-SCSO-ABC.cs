@@ -46,7 +46,7 @@ namespace SCSO_ABC_hybrid
             return bee.GetBestBeeValues();
         }
 
-        public (List<double> bestX, double bestF) Run()
+        public (List<double> bestX, double bestF) Run(TourData tour)
         {
             Initialize();
 
@@ -59,6 +59,12 @@ namespace SCSO_ABC_hybrid
                 Phase2_ABC_Employed();
                 Phase3_ABC_Onlooker();
                 Phase4_ABC_Scout();
+
+                if (t % 5 == 0) 
+                {
+                    ApplyTwoOptToTopIndividuals(tour, 0.2);
+                }
+
 
                 SyncPopulations();
                 bee.SaveBestFitnessPerIteration(BestHistory);
@@ -126,5 +132,86 @@ namespace SCSO_ABC_hybrid
                 }
             }
         }
+
+        private List<int> TwoOpt(List<int> route, double[,] costMatrix)
+        {
+            bool improved = true;
+            List<int> bestRoute = new List<int>(route);
+            double bestCost = RouteCost(bestRoute, costMatrix);
+
+            while (improved)
+            {
+                improved = false;
+                for (int i = 1; i < bestRoute.Count - 2; i++)
+                {
+                    for (int j = i + 1; j < bestRoute.Count - 1; j++)
+                    {
+                        List<int> newRoute = TwoOptSwap(bestRoute, i, j);
+                        double newCost = RouteCost(newRoute, costMatrix);
+                        if (newCost < bestCost)
+                        {
+                            bestRoute = newRoute;
+                            bestCost = newCost;
+                            improved = true;
+                        }
+                    }
+                }
+            }
+            return bestRoute;
+        }
+
+        private List<int> TwoOptSwap(List<int> route, int i, int j)
+        {
+            List<int> newRoute = new List<int>();
+
+            for (int c = 0; c < i; c++)
+                newRoute.Add(route[c]);
+
+            for (int c = j; c >= i; c--)
+                newRoute.Add(route[c]);
+
+            for (int c = j + 1; c < route.Count; c++)
+                newRoute.Add(route[c]);
+
+            return newRoute;
+        }
+
+        private double RouteCost(List<int> route, double[,] costMatrix)
+        {
+            double cost = 0;
+            for (int i = 0; i < route.Count - 1; i++)
+                cost += costMatrix[route[i], route[i + 1]];
+            return cost;
+        }
+        private List<double> EncodeRouteToRandomKey(List<int> route)
+        {
+            var innerNodes = route.Distinct().ToList();
+            List<double> randomKey = new List<double>(D);
+            double step = 1.0 / (innerNodes.Count + 1);
+
+            for (int i = 0; i < innerNodes.Count; i++)
+            {
+                double val = step * (i + 1);
+                randomKey.Add(val);
+            }
+            return randomKey;
+        }
+
+        public void ApplyTwoOptToTopIndividuals(TourData tour, double topFraction = 0.2)
+        {
+            int topCount = (int)(N * topFraction);
+            if (topCount < 1) topCount = 1;
+
+            for (int k = 0; k < topCount; k++)
+            {
+                var rk = bee.Bee[k].Values;
+                var decodedRoute = tour.DecodeRandomKey(rk);
+                var improvedRoute = TwoOpt(decodedRoute, tour.CostMatrix);
+                var newRandomKey = EncodeRouteToRandomKey(improvedRoute);
+                bee.Bee[k] = (newRandomKey, 0); 
+            }
+        }
+
     }
+
 }

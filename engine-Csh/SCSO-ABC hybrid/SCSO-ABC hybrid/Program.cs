@@ -41,14 +41,23 @@ class Program
         //TEST HYBRID WWITH DATA FROM JSON FILE
         var tour = new TourData();
 
-        string baseDir = @"../../../data";
-        string filePath = Path.Combine(baseDir, "tourdata.json");
+        string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+        string parent = exeDir;
+
+        for (int i = 0; i < 4; i++) 
+        {
+            parent = Directory.GetParent(parent).FullName;
+        }
+
+        string dataDir = Path.Combine(parent, "data");
+        string filePath = Path.Combine(dataDir, "tourdata.json");
+
 
         try
         {
             tour.LoadFromJson(filePath);
-            Console.WriteLine("=== DỮ LIỆU TOUR ===");
-            tour.Print();
+            //Console.WriteLine("=== DỮ LIỆU TOUR ===");
+            //tour.Print();
         }
         catch (Exception ex)
         {
@@ -72,17 +81,17 @@ class Program
 
         var hybrid = new HybridABCSCSO(bee, scso);
 
-        Console.WriteLine("\n=== BẮT ĐẦU TỐI ƯU LỘ TRÌNH (Hybrid ABC–SCSO) ===");
+        //Console.WriteLine("\n=== BẮT ĐẦU TỐI ƯU LỘ TRÌNH (Hybrid ABC–SCSO) ===");
         var (bestX, bestF) = hybrid.Run(tour);
 
-        Console.WriteLine("\n=== KẾT QUẢ TỐI ƯU ===");
-        Console.WriteLine("Best Random-Key vector: " + string.Join(", ", bestX));
+        //Console.WriteLine("\n=== KẾT QUẢ TỐI ƯU ===");
+        //Console.WriteLine("Best Random-Key vector: " + string.Join(", ", bestX));
 
         var bestRoute = tour.DecodeRandomKey(bestX);
-        Console.WriteLine("Best Route (index): " + string.Join(" -> ", bestRoute));
-        Console.WriteLine("Best Objective (Cost): " + bestF);
+        //Console.WriteLine("Best Route (index): " + string.Join(" -> ", bestRoute));
+        //Console.WriteLine("Best Objective (Cost): " + bestF);
 
-        string csvPath = Path.Combine(baseDir, "BestHistory.csv");
+        string csvPath = Path.Combine(dataDir, "BestHistory.csv");
         try
         {
             using (var writer = new StreamWriter(csvPath))

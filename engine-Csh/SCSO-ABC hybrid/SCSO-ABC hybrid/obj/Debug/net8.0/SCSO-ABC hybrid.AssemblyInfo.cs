@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SCSO-ABC hybrid")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63341fcd4a0e4386ff7b41b7b82502f54c6d21b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f147cb53805186759dcd4f65c2496567293f991d")]
 [assembly: System.Reflection.AssemblyProductAttribute("SCSO-ABC hybrid")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SCSO-ABC hybrid")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

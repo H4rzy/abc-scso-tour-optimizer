@@ -71,7 +71,7 @@ namespace SCSO_ABC_hybrid
 
                 var currentBestX = GlobalBest();
                 double currentBestF = bee.Objective(currentBestX);
-                Console.WriteLine($"Iter {t}: best f(x) = {currentBestF:F6}");
+                //Console.WriteLine($"Iter {t}: best f(x) = {currentBestF:F6}");
             }
 
             var bestX = GlobalBest();

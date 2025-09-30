@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs-extra');
-const csv = require('csv-parser');
 const { getPool, sql } = require('../db');
 const engine = require('../services/engineConnector');
 
@@ -8,57 +7,50 @@ const DATA_DIR = path.join(__dirname,
   '../../engine-Csh/SCSO-ABC hybrid/SCSO-ABC hybrid/data');
 
 const TOURDATA_PATH = path.join(DATA_DIR, 'tourdata.json');
-const BESTHISTORY_PATH = path.join(DATA_DIR, 'BestHistory.csv');
+const RESULT_PATH = path.join(DATA_DIR, 'result.json');
 
 exports.uploadAndRun = async (req, res, next) => {
   try {
     const data = req.body;
 
-    
+    // 1. Đảm bảo thư mục tồn tại
     await fs.ensureDir(DATA_DIR);
-    console.log('Đang ghi data tại:',DATA_DIR);
+    console.log('Đang ghi data tại:', DATA_DIR);
 
+    // 2. Ghi file tourdata.json
     await fs.writeJson(TOURDATA_PATH, data, { spaces: 2 });
+    console.log('Đã ghi tourdata.json tại:', TOURDATA_PATH);
 
-    console.log('Đang ghi tourdata.json tại:', TOURDATA_PATH);
-
+    // 3. Chạy Engine
     await engine.runEngine();
 
-    console.log('Đang ghi BestHistory.csv tại:', BESTHISTORY_PATH);
+    // 4. Đọc result.json do Engine xuất ra
+    const exists = await fs.pathExists(RESULT_PATH);
+    if (!exists) {
+      return res.status(500).json({ error: 'Không tìm thấy result.json sau khi chạy Engine' });
+    }
 
-    const exists = await fs.pathExists(BESTHISTORY_PATH);
-    if (!exists) return res.status(500).json({ error: 'Không tìm thấy BestHistory.csv sau khi chạy Engine' });
+    const result = await fs.readJson(RESULT_PATH);
+    console.log('Kết quả engine:', result);
 
+    // 5. Lưu vào DB nếu cần
     const pool = await getPool();
     const rs = await pool.request()
       .input('TourName', sql.NVarChar, 'Tour via Upload')
-      .input('TotalCost', sql.Float, 0)
+      .input('TotalCost', sql.Float, result.bestCost)
       .query(`
         INSERT INTO Tours (TourName, TotalCost)
         VALUES (@TourName,@TotalCost);
         SELECT SCOPE_IDENTITY() AS TourID;
       `);
+
     const TourID = rs.recordset[0].TourID;
 
-    const results = [];
-    fs.createReadStream(BESTHISTORY_PATH)
-      .pipe(csv())
-      .on('data', row => results.push(row))
-      .on('end', async () => {
-        for (const r of results) {
-          await pool.request()
-            .input('TourID', sql.Int, TourID)
-            .input('Iteration', sql.Int, r.Iteration)
-            .input('BestCost', sql.Float, r.BestCost)
-            .query('INSERT INTO TourHistory (TourID, Iteration, BestCost) VALUES (@TourID,@Iteration,@BestCost)');
-        }
-
-        res.json({
-          message: 'Đã ghi tourdata.json, chạy Engine xong, insert TourHistory',
-          TourID,
-          totalRows: results.length
-        });
-      });
+    res.json({
+      message: 'Đã chạy Engine và lưu kết quả',
+      TourID,
+      result
+    });
 
   } catch (err) {
     next(err);

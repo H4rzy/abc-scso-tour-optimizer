@@ -1,6 +1,7 @@
 ﻿using System;
 using SCSO_ABC_hybrid;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 class Program
 {
     static void Main(string[] args)
@@ -81,34 +82,37 @@ class Program
 
         var hybrid = new HybridABCSCSO(bee, scso);
 
-        //Console.WriteLine("\n=== BẮT ĐẦU TỐI ƯU LỘ TRÌNH (Hybrid ABC–SCSO) ===");
         var (bestX, bestF) = hybrid.Run(tour);
 
-        //Console.WriteLine("\n=== KẾT QUẢ TỐI ƯU ===");
-        //Console.WriteLine("Best Random-Key vector: " + string.Join(", ", bestX));
+        var bestRouteIndex = tour.DecodeRandomKey(bestX);
+        var bestRouteName = bestRouteIndex.Select(i => tour.Destinations[i]).ToList();
 
-        var bestRoute = tour.DecodeRandomKey(bestX);
-        //Console.WriteLine("Best Route (index): " + string.Join(" -> ", bestRoute));
-        //Console.WriteLine("Best Objective (Cost): " + bestF);
+        var resultObj = new
+        {
+            algorithm = "Hybrid ABC-SCSO + 2-Opt",
+            population = population,
+            iterations = iterMax,
+            bestCost = bestF,
+            bestRouteIndex = bestRouteIndex,
+            bestRouteName = bestRouteName
+        };
 
-        string csvPath = Path.Combine(dataDir, "BestHistory.csv");
+        string resultPath = Path.Combine(dataDir, "result.json");
         try
         {
-            using (var writer = new StreamWriter(csvPath))
+            string json = JsonSerializer.Serialize(resultObj, new JsonSerializerOptions
             {
-                writer.WriteLine("Iteration,BestCost");
-                for (int i = 0; i < hybrid.BestHistory.Count; i++)
-                {
-                    writer.WriteLine($"{i + 1},{hybrid.BestHistory[i]}");
-                }
-            }
-            Console.WriteLine($"\nĐã lưu BestHistory ra file CSV: {csvPath}");
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            });
+            File.WriteAllText(resultPath, json);
+            Console.WriteLine($"\nĐã lưu kết quả ra file JSON: {resultPath}");
+
+            Console.WriteLine(json);
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Lỗi ghi CSV: " + ex.Message);
+            Console.WriteLine("Lỗi ghi JSON: " + ex.Message);
         }
-
-        Console.WriteLine("\nHoàn tất tối ưu hóa!");
     }
 }

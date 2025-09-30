@@ -1,0 +1,20 @@
+{
+  "algorithm": "Hybrid ABC-SCSO \u002B 2-Opt",
+  "population": 10,
+  "iterations": 3000,
+  "bestCost": 67,
+  "bestRouteIndex": [
+    0,
+    4,
+    1,
+    3,
+    2
+  ],
+  "bestRouteName": [
+    "A",
+    "E",
+    "B",
+    "D",
+    "C"
+  ]
+}
